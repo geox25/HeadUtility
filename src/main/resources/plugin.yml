@@ -1,0 +1,4 @@
+name: HeadUtility
+version: '${project.version}'
+main: me.geox25.headutility.HeadUtility
+api-version: '1.20'
