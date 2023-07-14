@@ -28,5 +28,14 @@ class SkullManager {
 
             return skull
         }
+
+        fun fromUsername(username: String) : ItemStack {
+            val skull: ItemStack = ItemStack(Material.PLAYER_HEAD)
+            val skullMeta: SkullMeta = skull.itemMeta as SkullMeta
+            skullMeta.setOwningPlayer(Bukkit.getOfflinePlayer(username))
+            skull.setItemMeta(skullMeta)
+
+            return skull
+        }
     }
 }

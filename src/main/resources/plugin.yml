@@ -6,7 +6,7 @@ api-version: '1.20'
 commands:
   headutility:
     description: "Main Plugin Command"
-    usage: "/headutility <url> <texture-url>"
+    usage: "/headutility <url | name> <value>"
     aliases:
       - hu
     permission: headutility.use

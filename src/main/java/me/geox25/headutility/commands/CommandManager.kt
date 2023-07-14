@@ -1,5 +1,6 @@
 package me.geox25.headutility.commands
 
+import me.geox25.headutility.chat.messageHelpInfo
 import me.geox25.headutility.skull.SkullManager
 import net.kyori.adventure.text.Component
 import net.kyori.adventure.text.format.NamedTextColor.RED
@@ -38,14 +39,18 @@ class CommandManager : CommandExecutor {
             return false;
         }
 
-        if (args.count() < 2) {
-            messageInvalidArgs(player)
-            return false
+        if (args.isEmpty()) {
+            messageHelpInfo(player)
+            return true;
         }
 
         // Manage subcommands
         when(args[0]) {
             "url" -> {
+                if (args.count() < 2) {
+                    messageInvalidArgs(player)
+                    return false
+                }
                 try {
                     val item: ItemStack = SkullManager.fromURL(args[1])
                     player.inventory.addItem(item)
@@ -54,8 +59,24 @@ class CommandManager : CommandExecutor {
                     messageInvalidArgs(player)
                 }
             }
+            "name" -> {
+                if (args.count() < 2) {
+                    messageInvalidArgs(player)
+                    return false
+                }
+                try {
+                    val item: ItemStack = SkullManager.fromUsername(args[1])
+                    player.inventory.addItem(item)
+                } catch (e: Exception) {
+                    e.printStackTrace()
+                    messageInvalidArgs(player)
+                }
+            }
+            "help" -> {
+                messageHelpInfo(player)
+            }
             else -> {
-                messageInvalidArgs(player)
+                messageHelpInfo(player)
             }
         }
 
